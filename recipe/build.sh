@@ -1,9 +1,12 @@
 #!/bin/bash
 
 export CPPFLAGS="-I$PREFIX/include $CPPFLAGS"
-export LDFLAGS="-L$PREFIX/lib $LDFLAGS"
-export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
 export CFLAGS="-g -O3 $CFLAGS"
+
+if [ "$(uname)" == "Linux" ]
+then
+   export LDFLAGS="$LDFLAGS -Wl,-rpath-link,${PREFIX}/lib"
+fi
 
 chmod +x configure
 ./configure \
