@@ -1,6 +1,5 @@
 {% set version = "1.0.5" %}
 {% set name = "iml" %}
-{% set variant = "openblas" %}
 
 package:
   name: {{ name }}
@@ -12,23 +11,20 @@ source:
   sha256: 1dad666850895a5709b00b97422e2273f293cfadea7697a9f90b90953e847c2a
 
 build:
-  number: 1001
+  number: 1002
   skip: true  # [win]
   features:
-    - blas_{{ variant }}
 
 requirements:
   build:
     - libtool
     - {{ compiler('c') }}
   host:
+    - libblas
+    - libcblas
     - gmp
-    - openblas
-    - blas 1.1 {{ variant }}
   run:
     - gmp
-    - openblas
-    - blas 1.1 {{ variant }}
 
 test:
   commands:
