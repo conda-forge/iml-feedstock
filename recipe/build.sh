@@ -14,9 +14,9 @@ chmod +x configure
         --libdir="$PREFIX/lib" \
         --enable-shared \
         --with-default="$PREFIX" \
-        --with-cblas="-lopenblas" \
+        --with-cblas="-lcblas" \
         --with-cblas-include="$PREFIX/include"
 
-make
+make -j${CPU_COUNT}
 make check
 make install
