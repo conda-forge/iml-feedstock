@@ -19,6 +19,7 @@ requirements:
   build:
     - libtool
     - make
+    - libtool  # [unix]
     - {{ compiler('c') }}
   host:
     - libblas
