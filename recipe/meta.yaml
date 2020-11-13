@@ -20,6 +20,7 @@ requirements:
     - libtool
     - make
     - libtool  # [unix]
+    - automake # [unix]
     - {{ compiler('c') }}
   host:
     - libblas
