@@ -1,12 +1,8 @@
 #!/bin/bash
 
-export CPPFLAGS="-I$PREFIX/include $CPPFLAGS"
-export CFLAGS="-g -O3 $CFLAGS"
+autoreconf -vfi
 
-if [ "$(uname)" == "Linux" ]
-then
-   export LDFLAGS="$LDFLAGS -Wl,-rpath-link,${PREFIX}/lib"
-fi
+export CFLAGS="-g -O3 $CFLAGS"
 
 chmod +x configure
 ./configure \
@@ -18,5 +14,7 @@ chmod +x configure
         --with-cblas-include="$PREFIX/include"
 
 make -j${CPU_COUNT}
-make check
+if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
+  make check
+fi
 make install

@@ -11,7 +11,7 @@ source:
   sha256: 1dad666850895a5709b00b97422e2273f293cfadea7697a9f90b90953e847c2a
 
 build:
-  number: 1002
+  number: 1003
   skip: true  # [win]
   features:
 
@@ -19,6 +19,8 @@ requirements:
   build:
     - libtool
     - make
+    - libtool  # [unix]
+    - automake  # [unix]
     - {{ compiler('c') }}
   host:
     - libblas
@@ -36,7 +38,7 @@ test:
 
 about:
   home: https://cs.uwaterloo.ca/~astorjoh/iml.html
-  license: GPLv2
+  license: GPL-2.0-or-later
   license_file: COPYING
   summary: |
     IML is a free library of C source code which implements algorithms for computing
