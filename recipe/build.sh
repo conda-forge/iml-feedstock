@@ -1,15 +1,8 @@
 #!/bin/bash
-# Get an updated config.sub and config.guess
-cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./config
-cp $BUILD_PREFIX/share/libtool/build-aux/config.* .
 
-export CPPFLAGS="-I$PREFIX/include $CPPFLAGS"
+autoreconf -vfi
+
 export CFLAGS="-g -O3 $CFLAGS"
-
-if [ "$(uname)" == "Linux" ]
-then
-   export LDFLAGS="$LDFLAGS -Wl,-rpath-link,${PREFIX}/lib"
-fi
 
 chmod +x configure
 ./configure \
@@ -22,6 +15,6 @@ chmod +x configure
 
 make -j${CPU_COUNT}
 if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
-make check
+  make check
 fi
 make install
