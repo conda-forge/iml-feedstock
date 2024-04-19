@@ -11,9 +11,12 @@ source:
   sha256: 1dad666850895a5709b00b97422e2273f293cfadea7697a9f90b90953e847c2a
 
 build:
-  number: 1003
+  number: 1004
   skip: true  # [win]
-  features:
+  run_exports:
+    # There has been no release since 2015. The last patch release did not
+    # contain any breaking API/ABI changes.
+    - {{ pin_subpackage("iml", max_pin="x.x") }}
 
 requirements:
   build:
@@ -25,8 +28,6 @@ requirements:
   host:
     - libblas
     - libcblas
-    - gmp
-  run:
     - gmp
 
 test:
@@ -41,9 +42,10 @@ about:
   license: GPL-2.0-or-later
   license_file: COPYING
   summary: |
-    IML is a free library of C source code which implements algorithms for computing
-    exact solutions to dense systems of linear equations over the integers.
+    IML as a C library which implements algorithms for computing exact
+    solutions to dense systems of linear equations over the integers.
 
 extra:
   recipe-maintainers:
     - isuruf
+    - saraedum
